@@ -1,0 +1,32 @@
+# docker-compose.yml: use for local docker orchestration.
+version: "3"
+
+services:
+    mysql-camunda:
+        image: mysql:5.7
+        volumes:
+            - db-data:/var/lib/mysql
+        container_name: container-mysql2
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+            MYSQL_DATABASE: process_engine
+            MYSQL_USER: root
+            MYSQL_PASSWORD: password
+
+    camunda:
+        image: camunda/camunda-bpm-platform:latest
+        container_name: camunda-server
+        environment:
+            DB_DRIVER: com.mysql.jdbc.Driver
+            DB_URL: jdbc:mysql://container-mysql2:3306/process_engine
+            DB_USERNAME: root
+            DB_PASSWORD: password
+            WAIT_FOR: container-mysql:3306
+            WAIT_FOR_TIMEOUT: 120
+        depends_on:
+            - mysql-camunda
+        links:
+            - mysql-camunda
+
+volumes:
+    db-data: {}

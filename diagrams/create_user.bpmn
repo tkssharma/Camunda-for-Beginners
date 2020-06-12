@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0z1e8ak" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.0">
+  <bpmn:process id="create-user" name="Create User" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Create User">
+      <bpmn:outgoing>SequenceFlow_0djwe0p</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0djwe0p" sourceRef="StartEvent_1" targetRef="Task_1b6gbz1" />
+    <bpmn:serviceTask id="Task_0hzl249" name="Send Email" camunda:type="external" camunda:topic="send-email">
+      <bpmn:incoming>SequenceFlow_1m4n656</bpmn:incoming>
+      <bpmn:outgoing>Flow_0raexyr</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Task_1b6gbz1" name="Save on Database" camunda:type="external" camunda:topic="save-database">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="firstName" />
+          <camunda:inputParameter name="lastName" />
+          <camunda:outputParameter name="username" />
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0djwe0p</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1m4n656</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_1m4n656" sourceRef="Task_1b6gbz1" targetRef="Task_0hzl249" />
+    <bpmn:sequenceFlow id="Flow_0raexyr" sourceRef="Task_0hzl249" targetRef="Activity_0qz8rl2" />
+    <bpmn:endEvent id="Event_1rnflru">
+      <bpmn:incoming>Flow_18yzps7</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_18yzps7" sourceRef="Activity_0qz8rl2" targetRef="Event_1rnflru" />
+    <bpmn:serviceTask id="Activity_0qz8rl2" name="Task Done" camunda:type="external" camunda:topic="done">
+      <bpmn:incoming>Flow_0raexyr</bpmn:incoming>
+      <bpmn:outgoing>Flow_18yzps7</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="create-user">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="167" y="142" width="60" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0djwe0p_di" bpmnElement="SequenceFlow_0djwe0p">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_0z9vven_di" bpmnElement="Task_0hzl249">
+        <dc:Bounds x="430" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_1odgiun_di" bpmnElement="Task_1b6gbz1">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1m4n656_di" bpmnElement="SequenceFlow_1m4n656">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="430" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0raexyr_di" bpmnElement="Flow_0raexyr">
+        <di:waypoint x="530" y="117" />
+        <di:waypoint x="600" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_1rnflru_di" bpmnElement="Event_1rnflru">
+        <dc:Bounds x="772" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_18yzps7_di" bpmnElement="Flow_18yzps7">
+        <di:waypoint x="700" y="117" />
+        <di:waypoint x="772" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_1vvteyg_di" bpmnElement="Activity_0qz8rl2">
+        <dc:Bounds x="600" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
