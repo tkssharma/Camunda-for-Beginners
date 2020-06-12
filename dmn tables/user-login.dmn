@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_0x5aj6y" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.7.0">
+  <decision id="authCheck" name="userLogin">
+    <extensionElements>
+      <biodi:bounds x="150" y="150" width="180" height="80" />
+    </extensionElements>
+    <decisionTable id="decisionTable_1" hitPolicy="FIRST">
+      <input id="input_1" label="username" camunda:inputVariable="username">
+        <inputExpression id="inputExpression_1" typeRef="string">
+          <text>username</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_15sc08n">
+          <text>"test1","test2","test3"</text>
+        </inputValues>
+      </input>
+      <input id="InputClause_0bqrpwb" label="password" camunda:inputVariable="password">
+        <inputExpression id="LiteralExpression_1y2bxjb" typeRef="string">
+          <text>password</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_0remnuz">
+          <text>"test1","test2","test3"</text>
+        </inputValues>
+      </input>
+      <output id="output_1" label="loggedIn" typeRef="boolean" />
+      <rule id="DecisionRule_0mwtgq3">
+        <inputEntry id="UnaryTests_160s18j">
+          <text>"test1"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1w8801d">
+          <text>"test3"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0cukzhf">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1dogn05">
+        <inputEntry id="UnaryTests_0egk1i8">
+          <text>"test3"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0akdg99">
+          <text>"test2"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1x1ikmx">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1n8iee2">
+        <inputEntry id="UnaryTests_05a2cfz">
+          <text>"test2"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0nggids">
+          <text>"test1"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_054cah2">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1iqa8ie">
+        <inputEntry id="UnaryTests_0dk3u8u">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_01yhqgs">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1o87ly7">
+          <text></text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
